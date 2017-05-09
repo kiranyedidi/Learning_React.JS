@@ -1,0 +1,50 @@
+// Function div component
+
+const Result = (props)=>{
+  return (
+  <div>{props.incrementValue}</div>
+  );
+}
+
+// Class Button component
+class Button extends React.Component{
+
+	clickHandler = ()=>{
+  	this.props.onClickFunction(this.props.label);
+  };
+  
+  render(){
+		return(
+    	<button onClick={this.clickHandler}>+{this.props.label}</button>
+    );
+  }
+}
+
+class App extends React.Component{
+
+	constructor(props){
+  	super(props);
+  	this.state = {counter: 0};
+  }
+  
+    increment = (incrementValue)=>{
+  	this.setState((prevState)=>({
+    	counter: prevState.counter + incrementValue
+    }));
+  };
+	render(){
+  	return (
+    	<div>
+      	<Button label={1} onClickFunction={this.increment} />
+        <Button label={5} onClickFunction={this.increment} />
+        <Button label={10} onClickFunction={this.increment}/>
+        <Button label={20} onClickFunction={this.increment}/>
+        <Result incrementValue={this.state.counter} />
+      </div>
+    );
+  }
+}
+
+//ReactDOM.render(<Button label="Click"/>,mountNode);
+//ReactDOM.render(<Result incrementValue={10} />,mountNode);
+ReactDOM.render(<App />,mountNode);
